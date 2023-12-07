@@ -30,7 +30,9 @@ class Graph:
         #returns the weight of edge between k_u and k_v if it exists (None otherwise)
         if k_u in self.vertices and k_v in self.vertices[k_u].neighbors:
              return self.vertices[k_u].neighbors[k_v]
-        pass
+        else:
+            return 0
+
 
 
     def add_vertex(self,k,v,neighbors=[]):
@@ -66,7 +68,8 @@ class Graph:
              del self.vertices[k_v].neighbors[k_u]
         pass
 
-
+from collections import deque
+import heapq
 class Map(Graph):
 
     def __init__(self,n,obstacles=[]):
@@ -98,7 +101,7 @@ class Map(Graph):
                 if self.is_obstacle(x, y):
                     print("X", end=' ')
                 else:
-                    print(".", end=' ')
+                    print("o", end=' ')
             print()
         pass
 
