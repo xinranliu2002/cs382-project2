@@ -152,6 +152,8 @@ map.dijkstra_print_shortest_path(visit_order)
 ```
 ![Fig 6. a 5 $\times$ 5 Map with obstacles at (1,1),(3,2)](https://github.com/xinranliu2002/cs382-project2/blob/main/figures/fig6.png)
 
+Note: for convinience, the symbol 'X' in the graph represents either obtacle or the vertices that are not visited.
+
 ### Comparing the efficiency of BFS-SPSP and Dijkstra-SPSP in unweighted graphs
 Below steps compare the number of vertices visted for BFS-SPSP and Dijkstra-SPSP in order to get the shortest path:
 1. Creates three unweighted maps.
