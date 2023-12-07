@@ -68,8 +68,6 @@ class Graph:
              del self.vertices[k_v].neighbors[k_u]
         pass
 
-from collections import deque
-import heapq
 class Map(Graph):
 
     def __init__(self,n,obstacles=[]):
