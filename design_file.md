@@ -72,6 +72,8 @@ map.print_pretty()
 ```
 ![Fig 1. Creating new map](https://github.com/xinranliu2002/cs382-project2/blob/main/figures/fig1.png)
 
+In the graph, 'X' represents obstacles, and 'o' represents vertex.
+
 ## Part B: Breadth First Search
 
 ### BFS-SSSP
@@ -86,7 +88,7 @@ map.print_pretty()
 ```
 ![Fig 2. a 5 $\times$ 5 Map with obstacles at (1,1),(3,2)](https://github.com/xinranliu2002/cs382-project2/blob/main/figures/fig2.png)
 
-2. Calculate the shortest paths from source (1,2) to each space.
+2. Calculate the shortest paths from source (1,2) to each vertex.
    
 The function `bfs_sssp` takes as an argument a map and a source point
 
@@ -122,7 +124,7 @@ map.add_obstacle(3,2)
 map.add_edge((0,2),(1,2),4)
 map.add_edge((3,3),(4,3),4)
 ```
-2. Calculate the shortest paths from source (1,2) to each space.
+2. Calculate the shortest paths from source (1,2) to each vertex.
 ```
 paths = map.dijkstra_sssp((1,2))
 map.dijkstra_print_shortest_paths(paths)
@@ -133,7 +135,8 @@ map.dijkstra_print_shortest_paths(paths)
 Below steps demonstrate the dijkstra_spsp function:
 1. Use the same weighted map as above.
 2. Calculate the shortest path from (1,2) to (4,2).
-The function `dijkstra_spsp` takes a map, a start point, and an end point as arguments. It outputs a shortest path, and a set of vertices that are visited before we find such path.
+
+The function `dijkstra_spsp` takes a map, a start point, and an end point as arguments. It outputs a shortest path, and the number of vertices that are visited before we find such path.
 ```
 path, visited = map.dijkstra_spsp((1,2),(4,2))
 ```
@@ -148,5 +151,49 @@ visit_order = map.dijkstra_spsp_visit_order((1,2),(4,2))
 map.dijkstra_print_shortest_path(visit_order)
 ```
 ![Fig 6. a 5 $\times$ 5 Map with obstacles at (1,1),(3,2)](https://github.com/xinranliu2002/cs382-project2/blob/main/figures/fig6.png)
+
+### Comparing the efficiency of BFS-SPSP and Dijkstra-SPSP in unweighted graphs
+Below steps compare the number of vertices visted for BFS-SPSP and Dijkstra-SPSP in order to get the shortest path:
+1. Creates three unweighted maps.
+```
+map1 = Map(5)
+
+map1.add_obstacle(0, 2)
+map1.add_obstacle(2, 2)
+map1.add_obstacle(3, 2)
+
+map2 = Map(5)
+map2.add_obstacle(1, 2)
+map2.add_obstacle(2, 3)
+map2.add_obstacle(4, 1)
+
+map3 = Map(5)
+map3.add_obstacle(2, 2)
+map3.add_obstacle(3, 1)
+map3.add_obstacle(3, 3)
+```
+
+2. On each map, calculate the number of vertices visted by BFS-SPSP algorithm to find the shortest path from (1,4) to (4,2).
+
+The function `bfs_spsp_visited` takes a map, a start point, and an end point as arguments. It outputs a list of visited vertcies while runing the function.
+
+```
+bfs_visited1 = map1.bfs_spsp_visited((1,4),(4,2))
+bfs_visited2 = map2.bfs_spsp_visited((1,4),(4,2))
+bfs_visited3 = map3.bfs_spsp_visited((1,4),(4,2))
+
+print(bfs_visited1,bfs_visited2,bfs_visited3)
+output: 16 15 17
+```
+
+3. On each map, calculate the number of vertices visted by Dijkstra-SPSP algorithm to find the shortest path from (1,4) to (4,2).
+```
+path1, dijkstra_visited1 = map1.dijkstra_spsp((1,4),(4,2))
+path2, dijkstra_visited2 = map2.dijkstra_spsp((1,4),(4,2))
+path3, dijkstra_visited3 = map3.dijkstra_spsp((1,4),(4,2))
+
+print(dijkstra_visited1,dijkstra_visited2, dijkstra_visited3)
+output: 19 17 18
+```
 
 
